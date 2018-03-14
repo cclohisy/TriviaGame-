@@ -1,0 +1,11 @@
+body{
+    background-image: url("/Users/ceciliaclohisy/Documents/homework/TriviaGame-/assets/images/green-trees-background-28.jpeg")
+}
+.btn, .card {
+    background-color lightslategray;
+}
+
+.card{
+    color: cornflowerblue;
+}
+
