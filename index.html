@@ -79,7 +79,7 @@
                         <span id="resultMessage"> you were right/wrong/ran out of time message </span>
                     </h5>
                     <p class="card-text">
-                        <p id="correctAnswer"> if wrong/timeout... what was the right answer... otherwise blank
+                        <p id="correctAnswer"> 
                         </p>
 
                 </div>
@@ -97,17 +97,17 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span id="resultMessage"> Good Work... YOU FINSIHED</span>
+                        <span> Good Work... YOU FINSIHED!</span>
                     </h5>
                     <p class="card-text">
-                        <p> Correct Answers:
-                            <span id="userCorrect"></span>
+                        <p> 
+                            <span id="correct"></span>
                         </p>
-                        <p> Incorrect Answers:
-                            <span id="userWrong"></span>
+                        <p> 
+                            <span id="wrong"></span>
                         </p>
-                        <p> Unanswerd Questions:
-                            <span id="userTimeout"></span>
+                        <p> 
+                            <span id="unanswered"></span>
                         </p>
                         <button type="button" class="col-md-12 justify-content-center text-white btn btn-outline-primary btn-lg btn-block">TRY AGAIN</button>
 
@@ -434,7 +434,8 @@
             $("#ans3").text(questionArr[0].answerArr[2].text)
             $("#ans4").text(questionArr[0].answerArr[3].text)
             //display qestion data
-            $("#qaData").show();
+            setTimeout(function (){
+                $("#qaData").show()
             //display question div for 25 seconds
 
             //timeout function - see if user ran out of time 
@@ -475,7 +476,7 @@
 
 
 
-            //ELSE 
+            //ELSE - do nothing... react to clicks 
 
         }
 
@@ -483,24 +484,37 @@
         console.log("ans 2 value" + questionArr[0].answerArr[1].value)
 
         //on player click determine if choice was right or wrong
-        $(".answers").on("click", "#ans1", function () {
+        //runs as long as there are still questions... for loop? 
+        // for(i=0; i<= questionArray.length; i ++)
+        $(".answers").on("click", function(){
+            //hide question screeen
+            $("#qaData").hide();
+            // show result screen
+            $("#result").show();
+
+        }).on("click", "#ans1", function () {
             //questionNumber ++
-            //runs as long as there are still questions... for loop? 
-            // for(i=0; i<= questionArray.length; i ++)
+            
             //IF userChoice == true
             if (questionArr[0].answerArr[0].value == true) {
                 console.log("ans1 value " + questionArr[0].answerArr[0].value)
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
-                //run result display function
+                //display YOU ARE RIGHT message
+                $("#resultMessage").text("YOU GOT IT! ") 
+                //after 10 seconds display next question
             }
             //ELSE
             else {
                 //playerwrong + 1
                 userWrong++
                 console.log("wrong answer" + userWrong)
-                //run result display function
+                //display wrong message
+                $("#resultMessage").text("WRONG. Nice Try.")
+                //display correct answer
+                $("#correctAnswer").text("the correct answer was")
+                //after 10 seconds display next question 
             }
 
         }).on("click", "#ans2", function () {
@@ -508,14 +522,20 @@
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
-                //run result display function
+                //display YOU ARE RIGHT message
+                $("#resultMessage").text("YOU GOT IT! ") 
+                //after 10 seconds display next question
             }
             //ELSE
             else {
                 //playerwrong + 1
                 userWrong++
                 console.log("wrong answer" + userWrong)
-                //run result display function
+                 //display wrong message
+                 $("#resultMessage").text("WRONG. Nice Try.")
+                //display correct answer
+                $("#correctAnswer").text("the correct answer was")
+                //after 10 seconds display next question 
             }
 
         }).on("click", "#ans3", function () {
@@ -524,13 +544,19 @@
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //run result display function
+                $("#resultMessage").text("YOU GOT IT! ") 
+                //after 10 seconds display next question
             }
             //ELSE
             else {
                 //playerwrong + 1
                 userWrong++
                 console.log("wrong answer" + userWrong)
-                //run result display function
+                 //display wrong message
+                 $("#resultMessage").text("WRONG. Nice Try.")
+                //display correct answer
+                $("#correctAnswer").text("the correct answer was")
+                //after 10 seconds display next question 
             }
 
         }).on("click", "#ans4", function () {
@@ -538,19 +564,52 @@
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
-                //run result display function
+                //display right message 
+                $("#resultMessage").text("YOU GOT IT! ") 
+                //after 10 seconds display next question
             }
             //ELSE
             else {
                 //playerwrong + 1
                 userWrong++
                 console.log("wrong answer" + userWrong)
-                //run result display function
+                //display wrong message
+                 //display wrong message
+                 $("#resultMessage").text("WRONG. Nice Try.")
+                //display correct answer
+                $("#correctAnswer").text("the correct answer was")
+                //after 10 seconds display next question 
             }
 
         });
 
 
+        //seperate function?
+        //ELSE IF countdown == 0
+            //display results div with TIME OUT message
+            //display correctChoice 
+            //after 10 seconds display next question
+
+        // when questions done... display game over screen not working 
+        function endGame(){
+        //hide final result screen
+        $("#result").hide();
+        //display game over screen 
+        $("#gameOver").show();
+        //display correct answer total 
+        $("#correct").text("Correct Answers: " + userCorrect);
+        //display incorrect answer total 
+        $("#wrong").text("Incorrect Answers : " + userWrong)
+        //display unanswered total 
+        $("#unanswered").text("Unanswered : " + userTimeout)    
+        }   
+
+    
+
+        
+        
+        
+        }) // close document ready thing 
 
     </script>
 
