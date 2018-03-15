@@ -1,45 +1,95 @@
 
 $(document).ready(function () {
-//define variables needed
-    //questionand answer arrays
-    //userChoice
-    //correctChoice
-    //userCorrect
-    //userWrong
-    //userTimeout
-    //countdown
-    //timeRemains
-    //questionArray
-
-
 //hide all but startGame div
+$("#startGame").show();
 //question
+$("#question").hide();   
 //result
+$("#result").hide();
 //gameOver
+$("#gameOver").hide();
 
+//define variables needed
 
-//when player clicks start game button
-    //initialize game
-    //runs as long as there are still questions... for loop? 
-    // for(i=0; i<= questionArray.length; i ++)
+    //userCorrect - store correct answer total
+    var userCorrect = 0;
+    console.log("correct answers" + userCorrect);
+    //userWrong - store inccorecrt answer total
+    var userWrong = 0;
+    console.log("wrong answers" + userWrong);
+    //userTimeout- store unaswered total 
+    var userTimeout= 0;
+    console.log("unanswerd questions" + userTimeout);
+    //countdown - 25 seconds to answer each question
+    var countdown = 25
+    console.log("clock countdown" + countdown)
+    //timeRemains - true/false 
+    var timeRemains = true;
+    //question number- stores which question user in on ... 0-19
+    var questionNumber = 0;
 
+    //question and answer arrays? objects? 
+    var questionArr =[
+        q1={
+            question: " Leslie Knope was born in which Town?",
+            answers: {
+                Pawnee : false,
+                " option 2": true,
+                "New York, NY": false,
+                "Washington D.C": false,
+            }
+
+        }
+        
+    ]
+
+    console.log(questionArr[0].question);
+    console.log(question[0].answers);
     
+    //when player clicks start game button
+    //initialize game
+    $("#startButton").on("click", function () {
+        //display question div for 25 seconds
+            //display countdown = 25
+            //display question
+            //display answer options1-4
+        $("#question").show();
+        $("#startGame").hide();
+        
+        });
 
-    //generate random question to display question div for 25 seconds
-        //IF timeRemains== true? 
-            //on player click answer option
-                //IF userChoice == correctChoice
-                    //playerCorrect + 1
-                    //run result display function
-                //ELSE
-                    //playerwrong + 1
-                        //run result display function
 
-                    
-        //ELSE (player runs out of time)
-            //playerTimeout +1
-            //display results div with TIME OUT message
-                //run result display function
+    //on player click determine if choice was right or wrong
+    $(".answers").on("click", "#ans1", function(){
+        //questionNumber ++
+        //runs as long as there are still questions... for loop? 
+        // for(i=0; i<= questionArray.length; i ++)
+
+    //IF userChoice == true
+        //playerCorrect + 1
+        //run result display function
+    //ELSE
+        //playerwrong + 1
+            //run result display function
+
+    }).on("click", "#ans2", function(){
+
+    }).on("click", "#ans3", function(){
+        
+    }).on("click", "#ans4", function(){
+        
+    });
+
+//timeout function - see if user ran out of time 
+    
+    //IF coundown == 0 
+        //(player runs out of time timeRemains==false)
+        //playerTimeout +1
+        //display results div with TIME OUT message
+            //run result display function
+        
+                
+    //ELSE 
 
 
 //function to determine which result message to display
