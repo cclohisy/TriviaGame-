@@ -79,7 +79,7 @@
                         <span id="resultMessage"> you were right/wrong/ran out of time message </span>
                     </h5>
                     <p class="card-text">
-                        <p id="correctAnswer"> 
+                        <p id="correctAnswer">
                         </p>
 
                 </div>
@@ -100,13 +100,13 @@
                         <span> Good Work... YOU FINSIHED!</span>
                     </h5>
                     <p class="card-text">
-                        <p> 
+                        <p>
                             <span id="correct"></span>
                         </p>
-                        <p> 
+                        <p>
                             <span id="wrong"></span>
                         </p>
-                        <p> 
+                        <p>
                             <span id="unanswered"></span>
                         </p>
                         <button type="button" class="col-md-12 justify-content-center text-white btn btn-outline-primary btn-lg btn-block">TRY AGAIN</button>
@@ -153,12 +153,14 @@
         var userTimeout = 0;
         console.log("unanswered questions" + userTimeout);
         //countdown - 25 seconds to answer each question
-        var countdown = 25
+        var countdown = 5
         console.log("clock countdown" + countdown)
         //timeRemains - true/false 
         var timeRemains = true;
         //question number- stores which question user in on ... 0-19
         var questionNumber = 0;
+
+        var countdownTimer = 0;
 
         //question and answer arrays? objects? 
         var questionArr = [
@@ -180,7 +182,9 @@
                     option4 = {
                         text: "Washington D.C",
                         value: false
-                    }]
+                    }],
+                correctAnswer: 1,
+
             },
             q2 = {
                 question: " What College did Leslie Knope attend?",
@@ -411,11 +415,9 @@
 
 
         ];
-        // for (i = 0; i < questionArr.length; i++) {
-        //     console.log(questionArr[i].question);
-        // };
 
         console.log(questionArr[0].answerArr[0].value)
+        console.log(questionArr[0].correctAnswer)
 
 
         //when player clicks start game button
@@ -434,75 +436,81 @@
             $("#ans3").text(questionArr[0].answerArr[2].text)
             $("#ans4").text(questionArr[0].answerArr[3].text)
             //display qestion data
-            setTimeout(function (){
-                $("#qaData").show()
+            $("#qaData").show()
             //display question div for 25 seconds
 
             //timeout function - see if user ran out of time 
             // function timeOut(){
-            //IF coundown == 0 
-            if (countdown == 0) {
-                //(player runs out of time timeRemains==false)
-                //playerTimeout +1
-                userTimeout++
-                console.logt(userTimeout)
-                //run result display function
-                //display results div with TIME OUT message
 
-            }
+            countdownTimer = setInterval(function () {
+                // for (countdown = 25; countdown == 0; countdown++) {// does not work.. works with out but does not stop 
+                countdown = countdown - 1;
+                $("#timeRemaining").text(countdown);
+                //IF countdown == 0 
+                if (countdown == 0) {
+                    clearInterval(countdownTimer)
+                    //     userTimeout++
+                    userTimeout++
+                    console.log(userTimeout)
+                    //display results div with TIME OUT message
+                    timesUpsResults()
+                }
 
-            //ELSE 
-            else {
-                setInterval(function () {
-                    // for (countdown = 25; countdown == 0; countdown++) {// does not work.. works with out but does not stop 
-                    countdown = countdown - 1;
-                    $("#timeRemaining").text(countdown);
-                    //}
-                }, 1000);
-            }
-
-        });
-
-        //timeout function - see if user ran out of time 
-        // function timeOut(){
-        //IF coundown == 0 
-        if (countdown == 0) {
-            //(player runs out of time timeRemains==false)
-            //playerTimeout +1
-            userTimeout++
-            console.logt(userTimeout)
-            //run result display function
-            //display results div with TIME OUT message
-
-
-
-            //ELSE - do nothing... react to clicks 
-
+            }, 1000);
         }
 
-        console.log("ans1 value " + questionArr[0].answerArr[0].value)
-        console.log("ans 2 value" + questionArr[0].answerArr[1].value)
+        );
+
+
 
         //on player click determine if choice was right or wrong
         //runs as long as there are still questions... for loop? 
         // for(i=0; i<= questionArray.length; i ++)
-        $(".answers").on("click", function(){
+        $(".answers").on("click", function () {
             //hide question screeen
             $("#qaData").hide();
             // show result screen
             $("#result").show();
+            //stoptimer
+            clearInterval(countdownTimer);
+            //reset countdown
 
-        }).on("click", "#ans1", function () {
-            //questionNumber ++
-            
+        }).on("click", "#ans1", function () {          
+
             //IF userChoice == true
-            if (questionArr[0].answerArr[0].value == true) {
+            if (questionArr[questionNumber].answerArr[0].value == true) {
                 console.log("ans1 value " + questionArr[0].answerArr[0].value)
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //display YOU ARE RIGHT message
-                $("#resultMessage").text("YOU GOT IT! ") 
+                $("#resultMessage").text("YOU GOT IT! ")
+                $("#timeremaing").text(countdown)
+                //after 10 seconds display next question
+                $("#timeremaining").text(countdown)
+            }
+            //ELSE
+            else {
+                //playerwrong + 1
+                userWrong++
+                console.log("wrong answer" + userWrong)
+                //display wrong message
+                $("#timeremaing").text(countdown)
+                $("#resultMessage").text("WRONG. Nice Try.")
+                //display correct answer
+                $("#correctAnswer").text("the correct answer was")
+                //after 10 seconds display next question 
+            }
+              //questionNumber ++
+              questionNumber ++
+
+        }).on("click", "#ans2", function () {
+            if (questionArr[0].answerArr[1].value == true) {
+                //playerCorrect + 1
+                userCorrect++;
+                console.log(" correct answer " + userCorrect);
+                //display YOU ARE RIGHT message
+                $("#resultMessage").text("YOU GOT IT! ")
                 //after 10 seconds display next question
             }
             //ELSE
@@ -517,34 +525,13 @@
                 //after 10 seconds display next question 
             }
 
-        }).on("click", "#ans2", function () {
-            if (questionArr[0].answerArr[1].value == true) {
-                //playerCorrect + 1
-                userCorrect++;
-                console.log(" correct answer " + userCorrect);
-                //display YOU ARE RIGHT message
-                $("#resultMessage").text("YOU GOT IT! ") 
-                //after 10 seconds display next question
-            }
-            //ELSE
-            else {
-                //playerwrong + 1
-                userWrong++
-                console.log("wrong answer" + userWrong)
-                 //display wrong message
-                 $("#resultMessage").text("WRONG. Nice Try.")
-                //display correct answer
-                $("#correctAnswer").text("the correct answer was")
-                //after 10 seconds display next question 
-            }
-
         }).on("click", "#ans3", function () {
             if (questionArr[0].answerArr[2].value == true) {
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //run result display function
-                $("#resultMessage").text("YOU GOT IT! ") 
+                $("#resultMessage").text("YOU GOT IT! ")
                 //after 10 seconds display next question
             }
             //ELSE
@@ -552,8 +539,8 @@
                 //playerwrong + 1
                 userWrong++
                 console.log("wrong answer" + userWrong)
-                 //display wrong message
-                 $("#resultMessage").text("WRONG. Nice Try.")
+                //display wrong message
+                $("#resultMessage").text("WRONG. Nice Try.")
                 //display correct answer
                 $("#correctAnswer").text("the correct answer was")
                 //after 10 seconds display next question 
@@ -565,7 +552,7 @@
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //display right message 
-                $("#resultMessage").text("YOU GOT IT! ") 
+                $("#resultMessage").text("YOU GOT IT! ")
                 //after 10 seconds display next question
             }
             //ELSE
@@ -574,8 +561,8 @@
                 userWrong++
                 console.log("wrong answer" + userWrong)
                 //display wrong message
-                 //display wrong message
-                 $("#resultMessage").text("WRONG. Nice Try.")
+                //display wrong message
+                $("#resultMessage").text("WRONG. Nice Try.")
                 //display correct answer
                 $("#correctAnswer").text("the correct answer was")
                 //after 10 seconds display next question 
@@ -583,33 +570,56 @@
 
         });
 
-
-        //seperate function?
-        //ELSE IF countdown == 0
+        function timesUpsResults() {
+            //hide question screeen
+            $("#qaData").hide();
+            // show result screen
+            $("#result").show();
             //display results div with TIME OUT message
-            //display correctChoice 
-            //after 10 seconds display next question
+            $("#resultMessage").text("YOU SNOOZE YOU LOOSE! Out of Time")
+            //display correct answer
+            $("#correctAnswer").text("the correct answer was")
+            //after 3 seconds display next question 
+            nextQuestionTimer()
+        }
 
-        // when questions done... display game over screen not working 
-        function endGame(){
-        //hide final result screen
-        $("#result").hide();
-        //display game over screen 
-        $("#gameOver").show();
-        //display correct answer total 
-        $("#correct").text("Correct Answers: " + userCorrect);
-        //display incorrect answer total 
-        $("#wrong").text("Incorrect Answers : " + userWrong)
-        //display unanswered total 
-        $("#unanswered").text("Unanswered : " + userTimeout)    
-        }   
-
+        function nextQuestionTimer() {
+            resultsTimer = setInterval(function(){
+                //hide results show question             
+                $("#results").hide();
+                // show question screen
+                $("#qaData").show();
+                
+                
+            }, 3000)
     
 
+            };
+
         
-        
-        
-        }) // close document ready thing 
+
+        //}
+
+        // when questions done... display game over screen not working 
+        function endGame() {
+            //hide final result screen
+            $("#result").hide();
+            //display game over screen 
+            $("#gameOver").show();
+            //display correct answer total 
+            $("#correct").text("Correct Answers: " + userCorrect);
+            //display incorrect answer total 
+            $("#wrong").text("Incorrect Answers : " + userWrong)
+            //display unanswered total 
+            $("#unanswered").text("Unanswered : " + userTimeout)
+        }
+
+
+
+
+
+
+
 
     </script>
 
