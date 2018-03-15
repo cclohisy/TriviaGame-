@@ -8,14 +8,17 @@
     <!-- link to bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <!-- link to javascript file -->
-    <!-- <script src="assets/javascript/app.js"></script> -->
-    <!-- link to supplementary  -->
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <!-- link to jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>Tivia Game </title>
+    <!-- link to supplementary CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- link to javascript file -->
+    <!-- <script src="assets/javascript/app.js"></script> -->
+
+    <title>Parks and Rec Trivia </title>
 
 </head>
 
@@ -45,7 +48,7 @@
         <div id="qaData" class="card text-center">
             <div class="card-header">
                 Time Remaining:
-                <span id="timeRemaining">2100 </span> seconds
+                <span id="timeRemaining">0 </span> seconds
             </div>
             <div class="card-body">
                 <h5 class="card-title">Question:
@@ -72,11 +75,11 @@
             <div class="card text-center">
                 <div class="card-header">
                     Time Remaining:
-                    <span id="timeRemaining">stopped at time player chose answer </span> seconds
+                    <span id="timeRemaining"> </span> seconds
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span id="resultMessage"> you were right/wrong/ran out of time message </span>
+                        <span id="resultMessage"> </span>
                     </h5>
                     <p class="card-text">
                         <p id="correctAnswer">
@@ -109,7 +112,7 @@
                         <p>
                             <span id="unanswered"></span>
                         </p>
-                        <button type="button" class="col-md-12 justify-content-center text-white btn btn-outline-primary btn-lg btn-block">TRY AGAIN</button>
+                        <button type="button" id="retryButton" class="col-md-12 justify-content-center text-white btn btn-outline-primary btn-lg btn-block">TRY AGAIN</button>
 
 
                     </p>
@@ -118,16 +121,6 @@
             </div>
 
         </div>
-
-
-
-
-
-
-
-
-
-
     </div>
 
     <script>
@@ -153,8 +146,7 @@
         var userTimeout = 0;
         console.log("unanswered questions" + userTimeout);
         //countdown - 25 seconds to answer each question
-        var countdown = 5
-        console.log("clock countdown" + countdown)
+        var countdown = 7;
         //timeRemains - true/false 
         var timeRemains = true;
         //question number- stores which question user in on ... 0-19
@@ -164,7 +156,7 @@
 
         //question and answer arrays? objects? 
         var questionArr = [
-            q1 = {
+            q0 = {
                 question: " Where was Leslie Knope born?",
                 answerArr: [
                     option1 = {
@@ -186,23 +178,23 @@
                 correctAnswer: 1,
 
             },
-            q2 = {
+            q1 = {
                 question: " What College did Leslie Knope attend?",
                 answerArr: [
                     option1 = {
-                        text: "Pawnee, IN",
+                        text: "University of Wisconsin, Madison",
                         value: false
                     },
                     option2 = {
-                        text: "neighbor town, IN",
+                        text: "Indiana University, Bloomington",
                         value: true
                     },
                     option3 = {
-                        text: "New York, NY",
+                        text: "University of Minnesota, Twin Cities",
                         value: false
                     },
                     option4 = {
-                        text: "Washington D.C",
+                        text: "Purdue University",
                         value: false
 
                     },
@@ -210,7 +202,7 @@
                 ]
 
             },
-            q3 = {
+            q2 = {
                 question: " What is the name of Andy's most succesful Band?",
                 answerArr: [
                     option1 = {
@@ -230,7 +222,7 @@
                         value: false
                     }]
             },
-            q4 = {
+            q3 = {
                 question: " Which of the following were NEVER the offical town slogan of Pawnee? ",
                 answerArr: [
                     option1 = {
@@ -251,7 +243,7 @@
                     }]
             },
 
-            q5 = {
+            q4 = {
                 question: " Who is Andy's alter ego",
                 answerArr: [
                     option1 = {
@@ -272,15 +264,15 @@
                     }]
             },
 
-            q6 = {
-                question: 'What "holidy" do Tom and Donna celebrate once a year?',
+            q5 = {
+                question: 'What "holiday" do Tom and Donna celebrate once a year?',
                 answerArr: [
                     option1 = {
                         text: "Galentines Day",
                         value: false
                     },
                     option2 = {
-                        text: "Thier friendship aniversary",
+                        text: "Their friendship aniversary",
                         value: false
                     },
                     option3 = {
@@ -292,7 +284,7 @@
                         value: false
                     }]
             },
-            q7 = {
+            q6 = {
                 question: " What is Ben's favorite food? ",
                 answerArr: [
                     option1 = {
@@ -312,7 +304,7 @@
                         value: true
                     }]
             },
-            q8 = {
+            q7 = {
                 question: " What is the name of Leslie's adolescent nemesis?",
                 answerArr: [
                     option1 = {
@@ -332,7 +324,7 @@
                         value: false
                     }]
             },
-            q9 = {
+            q8 = {
                 question: " What is Leslie's favorite food?",
                 answerArr: [
                     option1 = {
@@ -352,7 +344,7 @@
                         value: false
                     }]
             },
-            q10 = {
+            q9 = {
                 question: " Tom invents which alcoholic beverage?",
                 answerArr: [
                     option1 = {
@@ -372,7 +364,7 @@
                         value: true
                     }]
             },
-            q11 = {
+            q10 = {
                 question: " What is 'Jerry' Gergich's real name?",
                 answerArr: [
                     option1 = {
@@ -392,8 +384,8 @@
                         value: false
                     }]
             },
-            q12 = {
-                question: " Ben was the mayor of which Minnesota town?",
+            q11 = {
+                question: " Ben Wyatt was the mayor of which Minnesota town at 18?",
                 answerArr: [
                     option1 = {
                         text: "Fridley",
@@ -416,78 +408,77 @@
 
         ];
 
-        console.log(questionArr[0].answerArr[0].value)
-        console.log(questionArr[0].correctAnswer)
-
-
         //when player clicks start game button
         //initialize game
         $("#startButton").on("click", function () {
-            //for questionNumber 0-19
-            //hide startGame div
+            //hide startGame 
             $("#startGame").hide();
-            //display countdown = 25
+            questionDisplay();
+        }
+
+        );
+        //when player clicks Try again button
+        //restart game
+        $("#retryButton").on("click", function () {
+            //hide startGame 
+            $("#gameOver").hide();
+            questionDisplay();
+        }
+
+        );
+        function questionDisplay() {
+            //display countdown = 7
             $("#timeRemaining").text(countdown);
             //display question
-            $("#trivia").text(questionArr[0].question)
+            $("#trivia").text(questionArr[questionNumber].question)
             //display answer options1-4
-            $("#ans1").text(questionArr[0].answerArr[0].text)
-            $("#ans2").html(questionArr[0].answerArr[1].text)
-            $("#ans3").text(questionArr[0].answerArr[2].text)
-            $("#ans4").text(questionArr[0].answerArr[3].text)
+            $("#ans1").text(questionArr[questionNumber].answerArr[0].text)
+            $("#ans2").text(questionArr[questionNumber].answerArr[1].text)
+            $("#ans3").text(questionArr[questionNumber].answerArr[2].text)
+            $("#ans4").text(questionArr[questionNumber].answerArr[3].text)
             //display qestion data
             $("#qaData").show()
-            //display question div for 25 seconds
+            //hide result div
+            $("#result").hide();
 
-            //timeout function - see if user ran out of time 
-            // function timeOut(){
-
+            //timeout function - see if user ran out of time - move onto result screen
             countdownTimer = setInterval(function () {
-                // for (countdown = 25; countdown == 0; countdown++) {// does not work.. works with out but does not stop 
+
                 countdown = countdown - 1;
                 $("#timeRemaining").text(countdown);
                 //IF countdown == 0 
                 if (countdown == 0) {
                     clearInterval(countdownTimer)
-                    //     userTimeout++
+                    //userTimeout++
                     userTimeout++
-                    console.log(userTimeout)
+                    console.log("unanswered questions" + userTimeout)
                     //display results div with TIME OUT message
-                    timesUpsResults()
+                    timesUpResults()
                 }
-
-            }, 1000);
-        }
-
-        );
-
-
+            }, 1000);// end of set interval
+        } //end of question display 
 
         //on player click determine if choice was right or wrong
-        //runs as long as there are still questions... for loop? 
-        // for(i=0; i<= questionArray.length; i ++)
         $(".answers").on("click", function () {
             //hide question screeen
             $("#qaData").hide();
             // show result screen
             $("#result").show();
             //stoptimer
-            clearInterval(countdownTimer);
+            // clearInterval(countdownTimer);
             //reset countdown
+            // countdown = 7;
 
-        }).on("click", "#ans1", function () {          
+        }).on("click", "#ans1", function () {
 
             //IF userChoice == true
             if (questionArr[questionNumber].answerArr[0].value == true) {
-                console.log("ans1 value " + questionArr[0].answerArr[0].value)
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //display YOU ARE RIGHT message
                 $("#resultMessage").text("YOU GOT IT! ")
-                $("#timeremaing").text(countdown)
-                //after 10 seconds display next question
-                $("#timeremaining").text(countdown)
+                $("#timeRemaining").text(countdown)
             }
             //ELSE
             else {
@@ -495,23 +486,23 @@
                 userWrong++
                 console.log("wrong answer" + userWrong)
                 //display wrong message
-                $("#timeremaing").text(countdown)
+                $("#timeRemaining").text(countdown)
                 $("#resultMessage").text("WRONG. Nice Try.")
                 //display correct answer
                 $("#correctAnswer").text("the correct answer was")
-                //after 10 seconds display next question 
             }
-              //questionNumber ++
-              questionNumber ++
+            //questionNumber ++
+            questionNumber++
+             //after 3 seconds display next question 
+           nextQuestionTimer()
 
         }).on("click", "#ans2", function () {
-            if (questionArr[0].answerArr[1].value == true) {
+            if (questionArr[questionNumber].answerArr[1].value == true) {
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //display YOU ARE RIGHT message
                 $("#resultMessage").text("YOU GOT IT! ")
-                //after 10 seconds display next question
             }
             //ELSE
             else {
@@ -522,17 +513,19 @@
                 $("#resultMessage").text("WRONG. Nice Try.")
                 //display correct answer
                 $("#correctAnswer").text("the correct answer was")
-                //after 10 seconds display next question 
             }
+            //questionNumber ++
+            questionNumber++;
+            //after 3 seconds display next question 
+            nextQuestionTimer();
 
         }).on("click", "#ans3", function () {
-            if (questionArr[0].answerArr[2].value == true) {
+            if (questionArr[questionNumber].answerArr[2].value == true) {
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //run result display function
                 $("#resultMessage").text("YOU GOT IT! ")
-                //after 10 seconds display next question
             }
             //ELSE
             else {
@@ -543,17 +536,20 @@
                 $("#resultMessage").text("WRONG. Nice Try.")
                 //display correct answer
                 $("#correctAnswer").text("the correct answer was")
-                //after 10 seconds display next question 
             }
+            //questionNumber ++
+            questionNumber++
+            //after 3 seconds display next question 
+            nextQuestionTimer()
+
 
         }).on("click", "#ans4", function () {
-            if (questionArr[0].answerArr[3].value == true) {
+            if (questionArr[questionNumber].answerArr[3].value == true) {
                 //playerCorrect + 1
                 userCorrect++;
                 console.log(" correct answer " + userCorrect);
                 //display right message 
                 $("#resultMessage").text("YOU GOT IT! ")
-                //after 10 seconds display next question
             }
             //ELSE
             else {
@@ -565,45 +561,62 @@
                 $("#resultMessage").text("WRONG. Nice Try.")
                 //display correct answer
                 $("#correctAnswer").text("the correct answer was")
-                //after 10 seconds display next question 
             }
+            //questionNumber ++
+            questionNumber++
+            //after 3 seconds display next question
+            nextQuestionTimer();
+
 
         });
 
-        function timesUpsResults() {
+        function timesUpResults() {
             //hide question screeen
             $("#qaData").hide();
             // show result screen
             $("#result").show();
             //display results div with TIME OUT message
-            $("#resultMessage").text("YOU SNOOZE YOU LOOSE! Out of Time")
+            $("#resultMessage").text("Out of Time")
             //display correct answer
             $("#correctAnswer").text("the correct answer was")
+            //display 0 time 
+            // $("#timeRemaining").text(countdown)
             //after 3 seconds display next question 
             nextQuestionTimer()
         }
+        // console.log(questionNumber);
 
         function nextQuestionTimer() {
-            resultsTimer = setInterval(function(){
+            resultsTimer = setInterval(function() {
                 //hide results show question             
                 $("#results").hide();
                 // show question screen
                 $("#qaData").show();
-                
-                
-            }, 3000)
-    
+                //reset countdown
+                countdown = 7;
+            }, 3000);
 
-            };
+            if (questionNumber < 10) {
+                questionDisplay();
+                // clearInterval(resultsTimer);
+            }
+            else
+                // clearInterval(resultsTimer);
+             endGame();
 
-        
 
-        //}
+
+        };
+
+
+
 
         // when questions done... display game over screen not working 
         function endGame() {
             //hide final result screen
             $("#result").hide();
+            //hide question div 
+            $("#qaData").hide()
             //display game over screen 
             $("#gameOver").show();
             //display correct answer total 
@@ -625,8 +638,8 @@
 
 
     <!-- link to boostrap/java -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+     <!-- link to jquery -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
