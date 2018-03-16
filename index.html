@@ -420,7 +420,14 @@
         //when player clicks Try again button
         //restart game
         $("#retryButton").on("click", function () {
+            questionNumber = 0;
             //hide startGame 
+            $("#gameOver").hide();
+            //question
+            $("#qaData").hide();
+            //result
+            $("#result").hide();
+            //gameOver
             $("#gameOver").hide();
             questionDisplay();
         }
@@ -430,14 +437,14 @@
             //display countdown = 7
             $("#timeRemaining").text(countdown);
             //display question
-            $("#trivia").text(questionArr[questionNumber].question)
+            $("#trivia").text(questionArr[questionNumber].question);
             //display answer options1-4
-            $("#ans1").text(questionArr[questionNumber].answerArr[0].text)
-            $("#ans2").text(questionArr[questionNumber].answerArr[1].text)
-            $("#ans3").text(questionArr[questionNumber].answerArr[2].text)
-            $("#ans4").text(questionArr[questionNumber].answerArr[3].text)
+            $("#ans1").text(questionArr[questionNumber].answerArr[0].text);
+            $("#ans2").text(questionArr[questionNumber].answerArr[1].text);
+            $("#ans3").text(questionArr[questionNumber].answerArr[2].text);
+            $("#ans4").text(questionArr[questionNumber].answerArr[3].text);
             //display qestion data
-            $("#qaData").show()
+            $("#qaData").show();
             //hide result div
             $("#result").hide();
 
@@ -464,13 +471,9 @@
             $("#qaData").hide();
             // show result screen
             $("#result").show();
-            //stoptimer
-            // clearInterval(countdownTimer);
-            //reset countdown
-            // countdown = 7;
+            
 
         }).on("click", "#ans1", function () {
-
             //IF userChoice == true
             if (questionArr[questionNumber].answerArr[0].value == true) {
                 //playerCorrect + 1
@@ -626,13 +629,6 @@
             //display unanswered total 
             $("#unanswered").text("Unanswered : " + userTimeout)
         }
-
-
-
-
-
-
-
 
     </script>
 
