@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- link to javascript file -->
-    <!-- <script src="assets/javascript/app.js"></script> -->
+    <script type ="text/javascript" src="assets/javascript/app.js"></script>
 
     <title>Parks and Rec Trivia </title>
 
@@ -29,7 +29,7 @@
     <!-- header - always displayed regardless of page content -->
     <section class="container">
         <header class="row">
-            <img class="col-md-12 justify-content-center" src="assets/images/recLogo.png">
+            <img class="col-md-12 mt-5 mb-5 justify-content-center" src="assets/images/recLogo.png">
         </header>
     </section>
 
@@ -37,15 +37,15 @@
     <div class="container content">
 
         <!--  start game display -->
-        <div id="startGame text-center" class=" card row">
+        <div id="startGame text-center" class="row">
             <!-- start game button -->
-            <button type="button" id="startButton" class="col-md-12 justify-content-center text-white btn btn-outline-primary btn-lg btn-block">START GAME</button>
+            <button type="button" id="startButton" class="col-md-12 justify-content-center text-white btn btn-lg btn-block">START GAME</button>
         </div>
         <br>
 
 
         <!--question/answer data  display-->
-        <div id="qaData" class="card text-center">
+        <div id="qaData" class="card rounded-0 text-center">
             <div class="card-header">
                 Time Remaining:
                 <span id="timeRemaining">0 </span> seconds
@@ -55,14 +55,10 @@
                     <span id="trivia"> some trivia questions?</span>
                 </h5>
                 <div class="card-text answers">
-                    <p id="ans1">option 1</p>
-                    <br>
-                    <p id="ans2">option 2</p>
-                    <br>
-                    <p id="ans3">option 3</p>
-                    <br>
-                    <p id="ans4">option 4</p>
-                    <br>
+                    <p class = "option" id="ans1">option 1</p>                 
+                    <p class = "option" id="ans2">option 2</p>
+                    <p class = "option" id="ans3">option 3</p>                 
+                    <p class = "option" id="ans4">option 4</p>
                 </div>
 
             </div>
@@ -71,8 +67,7 @@
 
         <br>
         <!--right OR wrong message display-->
-        <div id="result">
-            <div class="card text-center">
+            <div id="result" class="card rounded-0 text-center">
                 <div class="card-header">
                     Time Remaining:
                     <span id="timeRemaining"> </span> seconds
@@ -80,27 +75,31 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <span id="resultMessage"> </span>
+                        <br>
                     </h5>
                     <p class="card-text">
                         <p id="correctAnswer">
                         </p>
+                        <br>
+                        <img id ="rightImage" src="assets/images/leslieWon.gif" alt= "Got it right gif">
+                        <img id = "wrongImage" src="assets/images/ronWrong.gif" alt="got it wrong gif">
+                        <img id = "timeoutImage" src="assets/images/aprilTimeup.gif" alt="times up gif">
+                        
 
                 </div>
 
             </div>
-
-        </div>
         <br>
         <!-- game over display -->
         <div id="gameOver">
-            <div class="card text-center">
+            <div class="card rounded-0 text-center">
                 <div class="card-header">
-                    LETS SEE HOW YOU DID...
+                    Good Work... YOU FINSIHED!
                     <span id="timeRemaining"> </span>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <span> Good Work... YOU FINSIHED!</span>
+                        <span> LETS SEE HOW YOU DID...</span>
                     </h5>
                     <p class="card-text">
                         <p>
@@ -112,7 +111,7 @@
                         <p>
                             <span id="unanswered"></span>
                         </p>
-                        <button type="button" id="retryButton" class="col-md-12 justify-content-center text-white btn btn-outline-primary btn-lg btn-block">TRY AGAIN</button>
+                        <button type="button" id="retryButton" class="col-md-12 justify-content-center text-white btn btn-lg btn-block">TRY AGAIN</button>
 
 
                     </p>
@@ -123,519 +122,517 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            //hide all but startGame div
-            $("#startGame").show();
-            //question
-            $("#qaData").hide();
-            //result
-            $("#result").hide();
-            //gameOver
-            $("#gameOver").hide();
-        })
-        //define variables needed
+    <!-- <script>
+        // $(document).ready(function () {
+        //     //hide all but startGame div
+        //     $("#startGame").show();
+        //     //question
+        //     $("#qaData").hide();
+        //     //result
+        //     $("#result").hide();
+        //     //gameOver
+        //     $("#gameOver").hide();
+        // })
+        // //define variables needed
 
-        //userCorrect - store correct answer total
-        var userCorrect = 0;
-        console.log("correct answers" + userCorrect);
-        //userWrong - store inccorecrt answer total
-        var userWrong = 0;
-        console.log("wrong answers" + userWrong);
-        //userTimeout- store unaswered total 
-        var userTimeout = 0;
-        console.log("unanswered questions" + userTimeout);
-        //countdown - 25 seconds to answer each question
-        var countdown = 7;
-        //timeRemains - true/false 
-        var timeRemains = true;
-        //question number- stores which question user in on ... 0-19
-        var questionNumber = 0;
+        // //userCorrect - store correct answer total
+        // var userCorrect = 0;
+        // console.log("correct answers" + userCorrect);
+        // //userWrong - store inccorecrt answer total
+        // var userWrong = 0;
+        // console.log("wrong answers" + userWrong);
+        // //userTimeout- store unaswered total 
+        // var userTimeout = 0;
+        // console.log("unanswered questions" + userTimeout);
+        // //countdown - 25 seconds to answer each question
+        // var countdown = 7;
+        // //timeRemains - true/false 
+        // var timeRemains = true;
+        // //question number- stores which question user in on ... 0-19
+        // var questionNumber = 0;
 
-        var countdownTimer = 0;
+        // var countdownTimer = 0;
 
-        //question and answer arrays? objects? 
-        var questionArr = [
-            q0 = {
-                question: " Where was Leslie Knope born?",
-                answerArr: [
-                    option1 = {
-                        text: "Pawnee, IN",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Eagleton, IN",
-                        value: true
-                    },
-                    option3 = {
-                        text: "New York, NY",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Washington D.C",
-                        value: false
-                    }],
-                correctAnswer: 1,
+        // //question and answer arrays? objects? 
+        // var questionArr = [
+        //     q0 = {
+        //         question: " Where was Leslie Knope born?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Pawnee, IN",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Eagleton, IN",
+        //                 value: true
+        //             },
+        //             option3 = {
+        //                 text: "New York, NY",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Washington D.C",
+        //                 value: false
+        //             }],
+        //         correctAnswer: 1,
 
-            },
-            q1 = {
-                question: " What College did Leslie Knope attend?",
-                answerArr: [
-                    option1 = {
-                        text: "University of Wisconsin, Madison",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Indiana University, Bloomington",
-                        value: true
-                    },
-                    option3 = {
-                        text: "University of Minnesota, Twin Cities",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Purdue University",
-                        value: false
+        //     },
+        //     q1 = {
+        //         question: " What College did Leslie Knope attend?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "University of Wisconsin, Madison",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Indiana University, Bloomington",
+        //                 value: true
+        //             },
+        //             option3 = {
+        //                 text: "University of Minnesota, Twin Cities",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Purdue University",
+        //                 value: false
 
-                    },
+        //             },
 
-                ]
+        //         ]
 
-            },
-            q2 = {
-                question: " What is the name of Andy's most succesful Band?",
-                answerArr: [
-                    option1 = {
-                        text: "Rat Poison",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Rat Mouse",
-                        value: false
-                    },
-                    option3 = {
-                        text: "Mouse Rat",
-                        value: true
-                    },
-                    option4 = {
-                        text: "Rodent Trap",
-                        value: false
-                    }]
-            },
-            q3 = {
-                question: " Which of the following were NEVER the offical town slogan of Pawnee? ",
-                answerArr: [
-                    option1 = {
-                        text: "First in Friendship, Fourth in Obesity",
-                        value: false
-                    },
-                    option2 = {
-                        text: "A Town and a Place",
-                        value: false
-                    },
-                    option3 = {
-                        text: "The Akron of Southwest Indiana",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Storied Past, Bright Future",
-                        value: true
-                    }]
-            },
+        //     },
+        //     q2 = {
+        //         question: " What is the name of Andy's most succesful Band?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Rat Poison",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Rat Mouse",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "Mouse Rat",
+        //                 value: true
+        //             },
+        //             option4 = {
+        //                 text: "Rodent Trap",
+        //                 value: false
+        //             }]
+        //     },
+        //     q3 = {
+        //         question: " Which of the following were NEVER the offical town slogan of Pawnee? ",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "First in Friendship, Fourth in Obesity",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "A Town and a Place",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "The Akron of Southwest Indiana",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Storied Past, Bright Future",
+        //                 value: true
+        //             }]
+        //     },
 
-            q4 = {
-                question: " Who is Andy's alter ego",
-                answerArr: [
-                    option1 = {
-                        text: "Burt Macklin",
-                        value: true
-                    },
-                    option2 = {
-                        text: "Mike Burton",
-                        value: false
-                    },
-                    option3 = {
-                        text: "Ben Houndle",
-                        value: false
-                    },
-                    option4 = {
-                        text: " Andy Dier",
-                        value: false
-                    }]
-            },
+        //     q4 = {
+        //         question: " Who is Andy's alter ego",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Burt Macklin",
+        //                 value: true
+        //             },
+        //             option2 = {
+        //                 text: "Mike Burton",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "Ben Houndle",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: " Andy Dier",
+        //                 value: false
+        //             }]
+        //     },
 
-            q5 = {
-                question: 'What "holiday" do Tom and Donna celebrate once a year?',
-                answerArr: [
-                    option1 = {
-                        text: "Galentines Day",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Their friendship aniversary",
-                        value: false
-                    },
-                    option3 = {
-                        text: "Treat yo' self!",
-                        value: true
-                    },
-                    option4 = {
-                        text: "National Parks",
-                        value: false
-                    }]
-            },
-            q6 = {
-                question: " What is Ben's favorite food? ",
-                answerArr: [
-                    option1 = {
-                        text: "Pie",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Waffles",
-                        value: false
-                    },
-                    option3 = {
-                        text: "Pizza",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Calzones",
-                        value: true
-                    }]
-            },
-            q7 = {
-                question: " What is the name of Leslie's adolescent nemesis?",
-                answerArr: [
-                    option1 = {
-                        text: "George Weasly",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Greg Pikitus",
-                        value: true
-                    },
-                    option3 = {
-                        text: "April Ludgate",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Peter Finklestein",
-                        value: false
-                    }]
-            },
-            q8 = {
-                question: " What is Leslie's favorite food?",
-                answerArr: [
-                    option1 = {
-                        text: "Ice Cream",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Bacon",
-                        value: false
-                    },
-                    option3 = {
-                        text: "Waffles ",
-                        value: true
-                    },
-                    option4 = {
-                        text: "Whipped Cream",
-                        value: false
-                    }]
-            },
-            q9 = {
-                question: " Tom invents which alcoholic beverage?",
-                answerArr: [
-                    option1 = {
-                        text: "Viper Venom",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Tom's Potion",
-                        value: false
-                    },
-                    option3 = {
-                        text: "Blackout Bev",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Snake Juice",
-                        value: true
-                    }]
-            },
-            q10 = {
-                question: " What is 'Jerry' Gergich's real name?",
-                answerArr: [
-                    option1 = {
-                        text: "Larry",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Garry",
-                        value: true
-                    },
-                    option3 = {
-                        text: "Gerry",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Terry",
-                        value: false
-                    }]
-            },
-            q11 = {
-                question: " Ben Wyatt was the mayor of which Minnesota town at 18?",
-                answerArr: [
-                    option1 = {
-                        text: "Fridley",
-                        value: false
-                    },
-                    option2 = {
-                        text: "Patridge",
-                        value: true
-                    },
-                    option3 = {
-                        text: "Roseville",
-                        value: false
-                    },
-                    option4 = {
-                        text: "Eagan",
-                        value: false
-                    }]
-            },
+        //     q5 = {
+        //         question: 'What "holiday" do Tom and Donna celebrate once a year?',
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Galentines Day",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Their friendship aniversary",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "Treat yo' self!",
+        //                 value: true
+        //             },
+        //             option4 = {
+        //                 text: "National Parks",
+        //                 value: false
+        //             }]
+        //     },
+        //     q6 = {
+        //         question: " What is Ben's favorite food? ",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Pie",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Waffles",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "Pizza",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Calzones",
+        //                 value: true
+        //             }]
+        //     },
+        //     q7 = {
+        //         question: " What is the name of Leslie's adolescent nemesis?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "George Weasly",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Greg Pikitus",
+        //                 value: true
+        //             },
+        //             option3 = {
+        //                 text: "April Ludgate",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Peter Finklestein",
+        //                 value: false
+        //             }]
+        //     },
+        //     q8 = {
+        //         question: " What is Leslie's favorite food?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Ice Cream",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Bacon",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "Waffles ",
+        //                 value: true
+        //             },
+        //             option4 = {
+        //                 text: "Whipped Cream",
+        //                 value: false
+        //             }]
+        //     },
+        //     q9 = {
+        //         question: " Tom invents which alcoholic beverage?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Viper Venom",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Tom's Potion",
+        //                 value: false
+        //             },
+        //             option3 = {
+        //                 text: "Blackout Bev",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Snake Juice",
+        //                 value: true
+        //             }]
+        //     },
+        //     q10 = {
+        //         question: " What is 'Jerry' Gergich's real name?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Larry",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Garry",
+        //                 value: true
+        //             },
+        //             option3 = {
+        //                 text: "Gerry",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Terry",
+        //                 value: false
+        //             }]
+        //     },
+        //     q11 = {
+        //         question: " Ben Wyatt was the mayor of which Minnesota town at 18?",
+        //         answerArr: [
+        //             option1 = {
+        //                 text: "Fridley",
+        //                 value: false
+        //             },
+        //             option2 = {
+        //                 text: "Patridge",
+        //                 value: true
+        //             },
+        //             option3 = {
+        //                 text: "Roseville",
+        //                 value: false
+        //             },
+        //             option4 = {
+        //                 text: "Eagan",
+        //                 value: false
+        //             }]
+        //     },
 
 
-        ];
+        // ];
 
-        //when player clicks start game button
-        //initialize game
-        $("#startButton").on("click", function () {
-            //hide startGame 
-            $("#startGame").hide();
-            questionDisplay();
-        }
+        // //when player clicks start game button
+        // //initialize game
+        // $("#startButton").on("click", function () {
+        //     //hide startGame 
+        //     $("#startGame").hide();
+        //     questionDisplay();
+        // }
 
-        );
-        //when player clicks Try again button
-        //restart game
-        $("#retryButton").on("click", function () {
-            questionNumber = 0;
-            //hide startGame 
-            $("#gameOver").hide();
-            //question
-            $("#qaData").hide();
-            //result
-            $("#result").hide();
-            //gameOver
-            $("#gameOver").hide();
-            questionDisplay();
-        }
+        // );
+        // //when player clicks Try again button
+        // //restart game
+        // $("#retryButton").on("click", function () {
+        //     questionNumber = 0;
+        //     //hide startGame 
+        //     $("#gameOver").hide();
+        //     //question
+        //     $("#qaData").hide();
+        //     //result
+        //     $("#result").hide();
+        //     //gameOver
+        //     $("#gameOver").hide();
+        //     questionDisplay();
+        // }
 
-        );
-        function questionDisplay() {
-            //display countdown = 7
-            $("#timeRemaining").text(countdown);
-            //display question
-            $("#trivia").text(questionArr[questionNumber].question);
-            //display answer options1-4
-            $("#ans1").text(questionArr[questionNumber].answerArr[0].text);
-            $("#ans2").text(questionArr[questionNumber].answerArr[1].text);
-            $("#ans3").text(questionArr[questionNumber].answerArr[2].text);
-            $("#ans4").text(questionArr[questionNumber].answerArr[3].text);
-            //display qestion data
-            $("#qaData").show();
-            //hide result div
-            $("#result").hide();
+        // );
+        // function questionDisplay() {
+        //     //display countdown = 7
+        //     $("#timeRemaining").text(countdown);
+        //     //display question
+        //     $("#trivia").text(questionArr[questionNumber].question);
+        //     //display answer options1-4
+        //     $("#ans1").text(questionArr[questionNumber].answerArr[0].text);
+        //     $("#ans2").text(questionArr[questionNumber].answerArr[1].text);
+        //     $("#ans3").text(questionArr[questionNumber].answerArr[2].text);
+        //     $("#ans4").text(questionArr[questionNumber].answerArr[3].text);
+        //     //display qestion data
+        //     $("#qaData").show();
+        //     //hide result div
+        //     $("#result").hide();
 
-            //timeout function - see if user ran out of time - move onto result screen
-            countdownTimer = setInterval(function () {
+        //     //timeout function - see if user ran out of time - move onto result screen
+        //     countdownTimer = setInterval(function () {
 
-                countdown = countdown - 1;
-                $("#timeRemaining").text(countdown);
-                //IF countdown == 0 
-                if (countdown == 0) {
-                    clearInterval(countdownTimer)
-                    //userTimeout++
-                    userTimeout++
-                    console.log("unanswered questions" + userTimeout)
-                    //display results div with TIME OUT message
-                    timesUpResults()
-                }
-            }, 1000);// end of set interval
-        } //end of question display 
+        //         countdown = countdown - 1;
+        //         $("#timeRemaining").text(countdown);
+        //         //IF countdown == 0 
+        //         if (countdown == 0) {
+        //             clearInterval(countdownTimer)
+        //             //userTimeout++
+        //             userTimeout++
+        //             console.log("unanswered questions" + userTimeout)
+        //             //display results div with TIME OUT message
+        //             timesUpResults()
+        //         }
+        //     }, 1000);// end of set interval
+        // } //end of question display 
 
-        //on player click determine if choice was right or wrong
-        $(".answers").on("click", function () {
-            //hide question screeen
-            $("#qaData").hide();
-            // show result screen
-            $("#result").show();
+        // //on player click determine if choice was right or wrong
+        // $(".answers").on("click", function () {
+        //     //hide question screeen
+        //     $("#qaData").hide();
+        //     // show result screen
+        //     $("#result").show();
             
 
-        }).on("click", "#ans1", function () {
-            //IF userChoice == true
-            if (questionArr[questionNumber].answerArr[0].value == true) {
-                //playerCorrect + 1
-                userCorrect++;
-                console.log(" correct answer " + userCorrect);
-                //display YOU ARE RIGHT message
-                $("#resultMessage").text("YOU GOT IT! ")
-                $("#timeRemaining").text(countdown)
-            }
-            //ELSE
-            else {
-                //playerwrong + 1
-                userWrong++
-                console.log("wrong answer" + userWrong)
-                //display wrong message
-                $("#timeRemaining").text(countdown)
-                $("#resultMessage").text("WRONG. Nice Try.")
-                //display correct answer
-                $("#correctAnswer").text("the correct answer was")
-            }
-            //questionNumber ++
-            questionNumber++
-             //after 3 seconds display next question 
-           nextQuestionTimer()
+        // }).on("click", "#ans1", function () {
+        //     //IF userChoice == true
+        //     if (questionArr[questionNumber].answerArr[0].value == true) {
+        //         //playerCorrect + 1
+        //         userCorrect++;
+        //         console.log(" correct answer " + userCorrect);
+        //         //display YOU ARE RIGHT message
+        //         $("#resultMessage").text("YOU GOT IT! ")
+        //         $("#timeRemaining").text(countdown)
+        //     }
+        //     //ELSE
+        //     else {
+        //         //playerwrong + 1
+        //         userWrong++
+        //         console.log("wrong answer" + userWrong)
+        //         //display wrong message
+        //         $("#timeRemaining").text(countdown)
+        //         $("#resultMessage").text("WRONG. Nice Try.")
+        //         //display correct answer
+        //         $("#correctAnswer").text("the correct answer was")
+        //     }
+        //     //questionNumber ++
+        //     questionNumber++
+        //      //after 3 seconds display next question 
+        //    nextQuestionTimer()
 
-        }).on("click", "#ans2", function () {
-            if (questionArr[questionNumber].answerArr[1].value == true) {
-                //playerCorrect + 1
-                userCorrect++;
-                console.log(" correct answer " + userCorrect);
-                //display YOU ARE RIGHT message
-                $("#resultMessage").text("YOU GOT IT! ")
-            }
-            //ELSE
-            else {
-                //playerwrong + 1
-                userWrong++
-                console.log("wrong answer" + userWrong)
-                //display wrong message
-                $("#resultMessage").text("WRONG. Nice Try.")
-                //display correct answer
-                $("#correctAnswer").text("the correct answer was")
-            }
-            //questionNumber ++
-            questionNumber++;
-            //after 3 seconds display next question 
-            nextQuestionTimer();
+        // }).on("click", "#ans2", function () {
+        //     if (questionArr[questionNumber].answerArr[1].value == true) {
+        //         //playerCorrect + 1
+        //         userCorrect++;
+        //         console.log(" correct answer " + userCorrect);
+        //         //display YOU ARE RIGHT message
+        //         $("#resultMessage").text("YOU GOT IT! ")
+        //     }
+        //     //ELSE
+        //     else {
+        //         //playerwrong + 1
+        //         userWrong++
+        //         console.log("wrong answer" + userWrong)
+        //         //display wrong message
+        //         $("#resultMessage").text("WRONG. Nice Try.")
+        //         //display correct answer
+        //         $("#correctAnswer").text("the correct answer was")
+        //     }
+        //     //questionNumber ++
+        //     questionNumber++;
+        //     //after 3 seconds display next question 
+        //     nextQuestionTimer();
 
-        }).on("click", "#ans3", function () {
-            if (questionArr[questionNumber].answerArr[2].value == true) {
-                //playerCorrect + 1
-                userCorrect++;
-                console.log(" correct answer " + userCorrect);
-                //run result display function
-                $("#resultMessage").text("YOU GOT IT! ")
-            }
-            //ELSE
-            else {
-                //playerwrong + 1
-                userWrong++
-                console.log("wrong answer" + userWrong)
-                //display wrong message
-                $("#resultMessage").text("WRONG. Nice Try.")
-                //display correct answer
-                $("#correctAnswer").text("the correct answer was")
-            }
-            //questionNumber ++
-            questionNumber++
-            //after 3 seconds display next question 
-            nextQuestionTimer()
-
-
-        }).on("click", "#ans4", function () {
-            if (questionArr[questionNumber].answerArr[3].value == true) {
-                //playerCorrect + 1
-                userCorrect++;
-                console.log(" correct answer " + userCorrect);
-                //display right message 
-                $("#resultMessage").text("YOU GOT IT! ")
-            }
-            //ELSE
-            else {
-                //playerwrong + 1
-                userWrong++
-                console.log("wrong answer" + userWrong)
-                //display wrong message
-                //display wrong message
-                $("#resultMessage").text("WRONG. Nice Try.")
-                //display correct answer
-                $("#correctAnswer").text("the correct answer was")
-            }
-            //questionNumber ++
-            questionNumber++
-            //after 3 seconds display next question
-            nextQuestionTimer();
+        // }).on("click", "#ans3", function () {
+        //     if (questionArr[questionNumber].answerArr[2].value == true) {
+        //         //playerCorrect + 1
+        //         userCorrect++;
+        //         console.log(" correct answer " + userCorrect);
+        //         //run result display function
+        //         $("#resultMessage").text("YOU GOT IT! ")
+        //     }
+        //     //ELSE
+        //     else {
+        //         //playerwrong + 1
+        //         userWrong++
+        //         console.log("wrong answer" + userWrong)
+        //         //display wrong message
+        //         $("#resultMessage").text("WRONG. Nice Try.")
+        //         //display correct answer
+        //         $("#correctAnswer").text("the correct answer was")
+        //     }
+        //     //questionNumber ++
+        //     questionNumber++
+        //     //after 3 seconds display next question 
+        //     nextQuestionTimer()
 
 
-        });
-
-        function timesUpResults() {
-            //hide question screeen
-            $("#qaData").hide();
-            // show result screen
-            $("#result").show();
-            //display results div with TIME OUT message
-            $("#resultMessage").text("Out of Time")
-            //display correct answer
-            $("#correctAnswer").text("the correct answer was")
-            //display 0 time 
-            // $("#timeRemaining").text(countdown)
-            //after 3 seconds display next question 
-            nextQuestionTimer()
-        }
-        // console.log(questionNumber);
-
-        function nextQuestionTimer() {
-            resultsTimer = setInterval(function() {
-                //hide results show question             
-                $("#results").hide();
-                // show question screen
-                $("#qaData").show();
-                //reset countdown
-                countdown = 7;
-            }, 3000);
-
-            if (questionNumber < 10) {
-                questionDisplay();
-                // clearInterval(resultsTimer);
-            }
-            else
-                // clearInterval(resultsTimer);
-             endGame();
+        // }).on("click", "#ans4", function () {
+        //     if (questionArr[questionNumber].answerArr[3].value == true) {
+        //         //playerCorrect + 1
+        //         userCorrect++;
+        //         console.log(" correct answer " + userCorrect);
+        //         //display right message 
+        //         $("#resultMessage").text("YOU GOT IT! ")
+        //     }
+        //     //ELSE
+        //     else {
+        //         //playerwrong + 1
+        //         userWrong++
+        //         console.log("wrong answer" + userWrong)
+        //         //display wrong message
+        //         //display wrong message
+        //         $("#resultMessage").text("WRONG. Nice Try.")
+        //         //display correct answer
+        //         $("#correctAnswer").text("the correct answer was")
+        //     }
+        //     //questionNumber ++
+        //     questionNumber++
+        //     //after 3 seconds display next question
+        //     nextQuestionTimer();
 
 
+        // });
 
-        };
+        // function timesUpResults() {
+        //     //hide question screeen
+        //     $("#qaData").hide();
+        //     // show result screen
+        //     $("#result").show();
+        //     //display results div with TIME OUT message
+        //     $("#resultMessage").text("Out of Time")
+        //     //display correct answer
+        //     $("#correctAnswer").text("the correct answer was")
+        //     //display 0 time 
+        //     // $("#timeRemaining").text(countdown)
+        //     //after 3 seconds display next question 
+        //     nextQuestionTimer()
+        // }
+        // // console.log(questionNumber);
+
+        // function nextQuestionTimer() {
+        //     resultsTimer = setInterval(function() {
+        //         //hide results show question             
+        //         $("#results").hide();
+        //         // show question screen
+        //         $("#qaData").show();
+        //         //reset countdown
+        //         countdown = 7;
+        //     }, 3000);
+
+        //     if (questionNumber < 10) {
+        //         questionDisplay();
+        //         // clearInterval(resultsTimer);
+        //     }
+        //     else
+        //         // clearInterval(resultsTimer);
+        //      endGame();
 
 
 
+        // };
 
-        // when questions done... display game over screen not working 
-        function endGame() {
-            //hide final result screen
-            $("#result").hide();
-            //hide question div 
-            $("#qaData").hide()
-            //display game over screen 
-            $("#gameOver").show();
-            //display correct answer total 
-            $("#correct").text("Correct Answers: " + userCorrect);
-            //display incorrect answer total 
-            $("#wrong").text("Incorrect Answers : " + userWrong)
-            //display unanswered total 
-            $("#unanswered").text("Unanswered : " + userTimeout)
-        }
 
-    </script>
+
+
+        // // when questions done... display game over screen not working 
+        // function endGame() {
+        //     //hide final result screen
+        //     $("#result").hide();
+        //     //hide question div 
+        //     $("#qaData").hide()
+        //     //display game over screen 
+        //     $("#gameOver").show();
+        //     //display correct answer total 
+        //     $("#correct").text("Correct Answers: " + userCorrect);
+        //     //display incorrect answer total 
+        //     $("#wrong").text("Incorrect Answers : " + userWrong)
+        //     //display unanswered total 
+        //     $("#unanswered").text("Unanswered : " + userTimeout)
+        // }
+
+    </script> -->
 
 
     <!-- link to boostrap/java -->
-     <!-- link to jquery -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
