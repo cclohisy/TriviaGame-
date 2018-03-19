@@ -291,7 +291,7 @@ var questionArr = [
 $("#startButton").on("click", function () {
     //hide startbutton
     // $("#startGame").hide();
-    $("#startButton").hide();
+    $("#startButton").hide(3000);
     questionDisplay();
 }
 
