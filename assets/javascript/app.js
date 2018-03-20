@@ -364,8 +364,6 @@ $(".answers").on("click", function () {
         $("#rightImage").show();
         $("#wrongImage").hide();
         $("#timeoutImage").hide();
-        
-        // $("#timeRemaining").text(countdown)
     }
     //ELSE
     else {
@@ -375,7 +373,7 @@ $(".answers").on("click", function () {
         $("#timeRemaining").text(countdown)
         $("#resultMessage").text("WRONG. Nice Try.")
         //display correct answer
-        $("#correctAnswer").text("the correct answer was")
+        $("#correctAnswer").text("The correct answer was " + questionArr[questionNumber].answerArr[0].text)
         //display wrong gif... hide rest
         $("#rightImage").hide();
         $("#wrongImage").show();
@@ -404,7 +402,7 @@ $(".answers").on("click", function () {
         //display wrong message
         $("#resultMessage").text("WRONG. Nice Try.");
         //display correct answer
-        $("#correctAnswer").text("the correct answer was");
+        $("#correctAnswer").text("The correct answer was " + questionArr[questionNumber].answerArr[0].text)
         //display wrong gif... hide rest
         $("#rightImage").hide();
         $("#wrongImage").show();
@@ -433,7 +431,7 @@ $(".answers").on("click", function () {
         //display wrong message
         $("#resultMessage").text("WRONG. Nice Try.")
         //display correct answer
-        $("#correctAnswer").text("the correct answer was")
+        $("#correctAnswer").text("The correct answer was " + questionArr[questionNumber].answerArr[0].text)
         //display wrong gif... hide rest
         $("#rightImage").hide();
         $("#wrongImage").show();
@@ -464,7 +462,7 @@ $(".answers").on("click", function () {
         //display wrong message
         $("#resultMessage").text("WRONG. Nice Try.");
         //display correct answer
-        $("#correctAnswer").text("the correct answer was");
+        $("#correctAnswer").text("The correct answer was " + questionArr[questionNumber].answerArr[0].text)
         //display wrong gif... hide rest
         $("#rightImage").hide();
         $("#wrongImage").show();
@@ -539,5 +537,12 @@ function endGame() {
     $("#wrong").text("Incorrect Answers : " + userWrong)
     //display unanswered total 
     $("#unanswered").text("Unanswered : " + userTimeout)
+    
+    if(userCorrect == 12){
+        var allCorrectImg = $("<img>")
+        allCorrectImg.addClass("img-fluid")
+        allCorrectImg.attr("src", "/Users/ceciliaclohisy/Documents/homework/TriviaGame-/assets/images/allCorrectgif.gif")
+        $("#allCorrectImg").append(allCorrectImg)
+    }
 }
 });
