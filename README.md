@@ -14,7 +14,7 @@ All you need is a web browser!
 * jQuery
 * Bootstrap
 * HTML
-*CSS
+* CSS
 
 ### Authors 
 Cecilia Clohisy
