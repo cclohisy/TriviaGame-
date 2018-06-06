@@ -1,5 +1,4 @@
-
- console.log("hi")
+// console.log("hi, im linked")
 
 $(document).ready(function () {
     //hide all but startGame div
@@ -16,15 +15,12 @@ $(document).ready(function () {
 var rightImage = "assets/images/leslieWon.gif"
 //userCorrect - store correct answer total
 var userCorrect = 0;
-console.log("correct answers" + userCorrect);
 //userWrong - store inccorecrt answer total
 var userWrong = 0;
-console.log("wrong answers" + userWrong);
 //userTimeout- store unaswered total 
 var userTimeout = 0;
-console.log("unanswered questions" + userTimeout);
 //countdown - 25 seconds to answer each question
-var countdown = 7;
+var countdown = 10;
 //timeRemains - true/false 
 var timeRemains = true;
 //question number- stores which question user in on ... 0-19
@@ -286,8 +282,7 @@ var questionArr = [
 
 ];
 
-//when player clicks start game button
-//initialize game
+//when player clicks start game button initialize game
 $("#startButton").on("click", function () {
     //hide startbutton
     // $("#startGame").hide();
@@ -296,8 +291,7 @@ $("#startButton").on("click", function () {
 }
 
 );
-//when player clicks Try again button
-//restart game
+//when player clicks Try again button restart game
 $("#retryButton").on("click", function () {
     questionNumber = 0;
     //hide startGame 
@@ -337,12 +331,11 @@ function questionDisplay() {
             clearInterval(countdownTimer)
             //userTimeout++
             userTimeout++
-            console.log("unanswered questions" + userTimeout)
             //display results div with TIME OUT message
             timesUpResults()
         }
-    }, 1000);// end of set interval
-} //end of question display 
+    }, 1000);
+} 
 
 //on player click determine if choice was right or wrong
 $(".answers").on("click", function () {
@@ -372,8 +365,6 @@ $(".answers").on("click", function () {
         //display wrong message
         $("#timeRemaining").text(countdown)
         $("#resultMessage").text("WRONG. Nice Try.")
-        //display correct answer
-        $("#correctAnswer").text("The correct answer was " + questionArr[questionNumber].answerArr[0].text)
         //display wrong gif... hide rest
         $("#rightImage").hide();
         $("#wrongImage").show();
